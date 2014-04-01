@@ -13,8 +13,8 @@ module BeFrank
 
       if failed?
         subject = "Bad Chef run on #{name} @ #{now}"
-        message = [run_status.formatted_exception]
-        message += ::Array(backtrace).join("\n")
+        message = run_status.formatted_exception
+        message << Array(backtrace).join("\n")
       end
 
       send_new_email(
