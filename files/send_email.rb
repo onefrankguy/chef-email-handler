@@ -41,7 +41,7 @@ module BeFrank
         [k, data[k]]
       end
 
-      digest = ::Digest::SHA256.hexdigest data.to_s
+      digest = ::Digest::SHA256.hexdigest data[:body].to_s
       ::File.open(cache, 'w') do |io|
         io << digest
       end
