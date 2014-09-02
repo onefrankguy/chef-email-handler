@@ -13,8 +13,8 @@ module BeFrank
 
       if failed?
         subject = "Bad Chef run on #{name} @ #{now}"
-        message = [run_status.formatted_exception]
-        message += ::Array(backtrace).join("\n")
+        message = run_status.formatted_exception
+        message << Array(backtrace).join("\n")
       end
 
       send_new_email(
@@ -41,7 +41,7 @@ module BeFrank
         [k, data[k]]
       end
 
-      digest = ::Digest::SHA256.hexdigest data.to_s
+      digest = ::Digest::SHA256.hexdigest data[:body].to_s
       ::File.open(cache, 'w') do |io|
         io << digest
       end
